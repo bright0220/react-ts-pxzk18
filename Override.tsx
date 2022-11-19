@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 
 const Override = () => {
   const initialCount = +localStorage.getItem('storageCount') || 0;
@@ -34,11 +34,11 @@ const Button = ({ handleClick, children }) => (
   </button>
 );
 
-const Count = ({ count }) => {
+const Count = memo(({ count }) => {
   console.log('Does it (re)render?');
 
   return <h1>{count}</h1>;
-};
+});
 
 Button.defaultProps = {
   handleClick: () => console.log('Default'),
