@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Override = () => {
   const initialCount = +localStorage.getItem('storageCount') || 0;
@@ -8,6 +8,8 @@ const Override = () => {
   const handleIncrement = () => setCount((currentCount) => currentCount + 1);
 
   const handleDecrement = () => setCount((currentCount) => currentCount - 1);
+
+  useEffect(() => localStorage.setItem('storageCount', count), [count]);
 
   return (
     <div>
