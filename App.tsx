@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 interface Props {
   value: string;
@@ -15,7 +16,7 @@ const App = () => {
   return (
     <div>
       <Headline headline={greeting} />
-      <Input value={greeting} onChaneInput={handleChange}>
+      <Input value={greeting} onChangeInput={handleChange}>
         Set Greeting:
       </Input>
     </div>
@@ -24,13 +25,25 @@ const App = () => {
 
 const Headline = ({ headline }) => <h1>{headline}</h1>;
 
-const Input = ({ value, onChaneInput, children }) => {
+const Input = ({
+  value,
+  onChangeInput,
+  children,
+}: {
+  value: string;
+  onChangeInput: Function;
+  children: string;
+}) => {
   return (
     <label>
       {children}
-      <input type="text" value={value} onChange={onChaneInput} />
+      <input type="text" value={value} onChange={onChangeInput} />
     </label>
   );
+};
+
+Headline.propTypes = {
+  headline: PropTypes.string.isRequired,
 };
 
 export default App;

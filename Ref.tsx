@@ -10,7 +10,7 @@ const Ref = () => {
 
   const ref = useRef();
 
-  useEffect(() => ref.current.focus(), []);
+  //useEffect(() => ref.current.focus(), []);
 
   return (
     <div>

@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { useState, useEffect, memo } from 'react';
 
+interface Props {
+  count: string;
+}
+
 const Override = () => {
   const initialCount = +localStorage.getItem('storageCount') || 0;
   const [count, setCount] = useState(initialCount);
@@ -34,10 +38,10 @@ const Button = ({ handleClick, children }) => (
   </button>
 );
 
-const Count = memo(({ count }) => {
+const Count = memo((props: Props) => {
   console.log('Does it (re)render?');
 
-  return <h1>{count}</h1>;
+  return <h1>{props.count}</h1>;
 });
 
 Button.defaultProps = {
