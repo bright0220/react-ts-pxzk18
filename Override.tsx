@@ -1,14 +1,26 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 const Override = () => {
-  const sayHello = () => console.log('Hello');
+  const [count, setCount] = useState(0);
 
-  return <Button handleClick={sayHello} />;
+  const handleIncrement = () => setCount((currentCount) => currentCount + 1);
+
+  const handleDecrement = () => setCount((currentCount) => currentCount - 1);
+
+  return (
+    <div>
+      <h1>{count}</h1>
+
+      <Button handleClick={handleIncrement}>Increment</Button>
+      <Button handleClick={handleDecrement}>Decrement</Button>
+    </div>
+  );
 };
 
-const Button = ({ handleClick }) => (
+const Button = ({ handleClick, children }) => (
   <button type="button" onClick={handleClick}>
-    Button
+    {children}
   </button>
 );
 
