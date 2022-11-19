@@ -4,16 +4,23 @@ import { useState, useEffect } from 'react';
 const Override = () => {
   const initialCount = +localStorage.getItem('storageCount') || 0;
   const [count, setCount] = useState(initialCount);
+  const [greeting, setGreeting] = useState('Hello React!');
 
   const handleIncrement = () => setCount((currentCount) => currentCount + 1);
 
   const handleDecrement = () => setCount((currentCount) => currentCount - 1);
 
+  const handleChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => setGreeting(event.target.value);
+
   useEffect(() => localStorage.setItem('storageCount', count), [count]);
 
   return (
     <div>
-      <h1>{count}</h1>
+      <input type="text" onChange={handleChange} />
+
+      <Count count={count} />
 
       <Button handleClick={handleIncrement}>Increment</Button>
       <Button handleClick={handleDecrement}>Decrement</Button>
@@ -26,6 +33,12 @@ const Button = ({ handleClick, children }) => (
     {children}
   </button>
 );
+
+const Count = ({ count }) => {
+  console.log('Does it (re)render?');
+
+  return <h1>{count}</h1>;
+};
 
 Button.defaultProps = {
   handleClick: () => console.log('Default'),
