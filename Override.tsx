@@ -2,11 +2,9 @@ import * as React from 'react';
 import { useState } from 'react';
 
 const Override = () => {
-  console.log('Does it render?');
+  const initialCount = +localStorage.getItem('storageCount') || 0;
+  const [count, setCount] = useState(initialCount);
 
-  const [count, setCount] = useState(0);
-
-  console.log(`My count is ${count}`);
   const handleIncrement = () => setCount((currentCount) => currentCount + 1);
 
   const handleDecrement = () => setCount((currentCount) => currentCount - 1);
